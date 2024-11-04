@@ -1,0 +1,6 @@
+ENVIRONMENT_VARIABLES = {
+    'TARGET_ACCOUNT_ID': '123456789012',  # 目标账号ID
+    'SNAPSHOT_PREFIX': 'shared-backup',    # 复制快照的前缀
+    'RETENTION_DAYS': '3',               # 快照保留天数
+    'SNS_TOPIC_ARN': 'arn:aws-cn:sns:cn-northwest-1:AccountId:rds-backup-notifications'  # SNS主题ARN
+}

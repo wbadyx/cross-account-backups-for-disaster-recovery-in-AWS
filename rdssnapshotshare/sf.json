@@ -1,0 +1,104 @@
+{
+  "Comment": "RDS Backup Share Workflow",
+  "StartAt": "GetBackupInfo",
+  "States": {
+    "GetBackupInfo": {
+      "Type": "Task",
+      "Resource": "arn:aws-cn:lambda:cn-northwest-1:AccountId:function:GetBackupInfo",
+      "Next": "CreateManualSnapshot",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 3
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "NotifyError"
+        }
+      ]
+    },
+    "CreateManualSnapshot": {
+      "Type": "Task",
+      "Resource": "arn:aws-cn:lambda:cn-northwest-1:AccountId:function:CreateManualSnapshot",
+      "Next": "WaitForSnapshotReady",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 3
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "NotifyError"
+        }
+      ]
+    },
+    "WaitForSnapshotReady": {
+      "Type": "Wait",
+      "Seconds": 300,
+      "Next": "CheckSnapshotStatus"
+    },
+    "CheckSnapshotStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws-cn:lambda:cn-northwest-1:AccountId:function:CheckSnapshotStatus",
+      "Next": "IsSnapshotReady",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 3
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "NotifyError"
+        }
+      ]
+    },
+    "IsSnapshotReady": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.snapshotReady",
+          "BooleanEquals": true,
+          "Next": "ShareSnapshot"
+        }
+      ],
+      "Default": "WaitForSnapshotReady"
+    },
+    "ShareSnapshot": {
+      "Type": "Task",
+      "Resource": "arn:aws-cn:lambda:cn-northwest-1:AccountId:function:ShareSnapshot",
+      "End": true,
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 3
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "NotifyError"
+        }
+      ]
+    },
+    "NotifyError": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws-cn:sns:cn-northwest-1:AccountId:rds-backup-notifications",
+        "Subject": "RDS Snapshot Workflow Error",
+        "Message.$": "States.Format('Error occurred in state: {}. Error: {}', $.Error, $.Cause)"
+      },
+      "End": true
+    }
+  }
+}

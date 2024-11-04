@@ -1,0 +1,27 @@
+{
+    "version": "0",
+    "id": "673b6252-67ed-c576-7d82-333b8046b0d3",
+    "detail-type": "Backup Job State Change",
+    "source": "aws.backup",
+    "account": "AccountId",
+    "time": "2024-10-31T10:29:49Z",
+    "region": "cn-northwest-1",
+    "resources": [
+        "arn:aws-cn:rds:cn-northwest-1:AccountId:snapshot:awsbackup:job-09d8c4d4-5993-43bd-a7fc-6c7d1eadb7cd"
+    ],
+    "detail": {
+        "backupJobId": "09d8c4d4-5993-43bd-a7fc-6c7d1eadb7cd",
+        "backupSizeInBytes": "0",
+        "backupVaultArn": "arn:aws-cn:backup:cn-northwest-1:AccountId:backup-vault:ShareSnapshot",
+        "backupVaultName": "ShareSnapshot",
+        "bytesTransferred": "0",
+        "creationDate": "2024-10-31T10:21:42.790Z",
+        "iamRoleArn": "arn:aws-cn:iam::AccountId:role/service-role/AWSBackupDefaultServiceRole",
+        "resourceArn": "arn:aws-cn:rds:cn-northwest-1:AccountId:db:database-1",
+        "resourceType": "RDS",
+        "state": "COMPLETED",
+        "completionDate": "2024-10-31T10:25:44.207577096Z",
+        "startBy": "2024-10-31T11:21:42.790Z",
+        "percentDone": 100
+    }
+}
