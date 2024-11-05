@@ -2,14 +2,14 @@
 
 A comprehensive solution for setting up cross-account backups and disaster recovery (DR) in AWS, supporting S3, EC2, and RDS resources.
 
-## í ¼í¾¯ Disaster Recovery Objectives
+## ğŸ¯ Disaster Recovery Objectives
 
 - Build an efficient and cost-effective disaster recovery system in AWS
 - Ensure business continuity and data security
 - Recovery Time Objective (RTO): â‰¤ 12 hours
 - Recovery Point Objective (RPO): â‰¤ 24 hours
 
-## í ¼í¿—ï¸ Solution Architecture
+## ğŸ—ï¸ Solution Architecture
 
 | Service | DR Strategy |
 |---------|-------------|
@@ -17,7 +17,7 @@ A comprehensive solution for setting up cross-account backups and disaster recov
 | EC2 | Cross-account AMI sharing within the same region with retention period |
 | RDS | Cross-account snapshot sharing using AWS Backup service with retention period |
 
-## í ½í³‹ Implementation Guide
+## ğŸ“‹ Implementation Guide
 
 ### A. S3 Cross-Account Replication
 
@@ -503,7 +503,7 @@ aws events put-rule \
 
 A comprehensive solution for setting up cross-account backups and disaster recovery (DR) in AWS, supporting S3, EC2, and RDS resources.
 
-## í ¼í¿—ï¸ Architecture
+## ğŸ—ï¸ Architecture
 
 ![AWS Cross-Account Backup Architecture](assets/images/architecture.svg)
 
@@ -512,7 +512,7 @@ A comprehensive solution for setting up cross-account backups and disaster recov
 
 
 
-## í ½í²ª Solution Benefits
+## ğŸ’ª Solution Benefits
 
 1. **Reduced Recovery Time**: Direct use of shared images eliminates environment rebuild time
 2. **Consistency Assurance**: Complete system state preservation including OS, applications, and configurations
@@ -521,14 +521,14 @@ A comprehensive solution for setting up cross-account backups and disaster recov
 5. **Simplified Management**: Automated workflows reduce operational overhead
 6. **Enhanced Security**: Fine-grained access control through AWS IAM roles and policies
 
-## í ½í³ Prerequisites
+## ğŸ“ Prerequisites
 
 - Multiple AWS accounts (source and target)
 - Appropriate IAM roles and permissions
 - AWS services: S3, EC2, RDS, Lambda, Step Functions, EventBridge, SNS
 - AWS Backup service enabled
 
-## í ½íº€ Getting Started
+## ğŸš€ Getting Started
 
 1. Clone this repository
 2. Update the account IDs and region in the policy documents
@@ -538,7 +538,6 @@ A comprehensive solution for setting up cross-account backups and disaster recov
 6. Configure EventBridge rules
 7. Test the backup and sharing workflows
 
-## í ½í³„ License
+## ğŸ“„ License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
