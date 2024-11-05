@@ -499,9 +499,6 @@ aws events put-rule \
 ```
 </details>
 
-# Cross-Account Backups for Disaster Recovery in AWS
-
-A comprehensive solution for setting up cross-account backups and disaster recovery (DR) in AWS, supporting S3, EC2, and RDS resources.
 
 ## 🏗️ Architecture
 
